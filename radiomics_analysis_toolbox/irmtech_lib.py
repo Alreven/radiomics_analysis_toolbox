@@ -70,10 +70,10 @@ def n4itk(image: sitk.Image, dicom_folder: Path, iterations=(30, 20, 10)) -> sit
     unique_id = f"{dicom_folder.parent.name}{dicom_folder.name}"
     cached_image = load_from_nifti(unique_id)
     if cached_image:
-        print(f"⚡ Chargement du cache depuis cache_n4itk/{unique_id}.nii.gz")
+        print(f"Chargement du cache depuis cache_n4itk/{unique_id}.nii.gz")
         cached_image.CopyInformation(image)
         return cached_image
-    print(f"🛠️ Correction N4ITK appliquée pour la première fois sur acquisition {unique_id}")
+    print(f"Correction N4ITK appliquée pour la première fois sur acquisition {unique_id}")
     image = sitk.Cast(image, sitk.sitkFloat32)
     n4_filter = sitk.N4BiasFieldCorrectionImageFilter()
     n4_filter.SetMaximumNumberOfIterations(iterations)
